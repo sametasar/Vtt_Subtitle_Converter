@@ -10,3 +10,17 @@ C:\Users\postmanator\Desktop\srt-to-vtt-converter-master\SRT to VTT Converter\ob
 C:\Users\postmanator\Desktop\srt-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT to VTT Converter.csproj.GenerateResource.cache
 C:\Users\postmanator\Desktop\srt-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT_to_VTT_Converter.exe
 C:\Users\postmanator\Desktop\srt-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT_to_VTT_Converter.pdb
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\bin\x64\Debug\SRT_to_VTT_Converter.exe.config
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\bin\x64\Debug\SRT_to_VTT_Converter.exe
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\bin\x64\Debug\SRT_to_VTT_Converter.pdb
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT to VTT Converter.csproj.AssemblyReference.cache
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\MainWindow.baml
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\MainWindow.g.cs
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\App.g.cs
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT_to_VTT_Converter_MarkupCompile.cache
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT_to_VTT_Converter.g.resources
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT_to_VTT_Converter.Properties.Resources.resources
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT to VTT Converter.csproj.GenerateResource.cache
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT to VTT Converter.csproj.CoreCompileInputs.cache
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT_to_VTT_Converter.exe
+C:\PROJELER\Vtt_Subtitle_Converter\SRT-to-vtt-converter-master\SRT to VTT Converter\obj\x64\Debug\SRT_to_VTT_Converter.pdb

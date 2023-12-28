@@ -212,67 +212,59 @@ namespace SRT_to_VTT_Converter
 			WpOffsetInput.IsEnabled = true;
 		}
 
-		///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		private void Convert(string dizin,string dosya)
-		{
-            if (!Directory.Exists(dizin+"\\vtt"))
+        private void Convert(string directory, string file)
+        {
+            string vttDirectory = Path.Combine(directory, "vtt");
+            if (!Directory.Exists(vttDirectory))
             {
-                Directory.CreateDirectory(dizin + "\\vtt");
+                Directory.CreateDirectory(vttDirectory);
             }
 
-            StreamReader strReader = new StreamReader(dizin + dosya, Encoding.GetEncoding("iso-8859-9"));
-                                 
-            StreamWriter strWriter = new StreamWriter(dizin + "\\vtt\\" + dosya.Replace(".srt", ".vtt"),false, Encoding.UTF8);
-			
+            string srtFilePath = Path.Combine(directory, file);
+            string vttFilePath = Path.Combine(vttDirectory, file.Replace(".srt", ".vtt"));
 
-				var rgxDialogNumber = new Regex(@"^\d+$");
-				var rgxTimeFrame = new Regex(@"(\d\d:\d\d:\d\d,\d\d\d) --> (\d\d:\d\d:\d\d,\d\d\d)");
-                
-              
-                // Write starting line for the WebVTT file
-                strWriter.WriteLine("WEBVTT");
-				strWriter.WriteLine("");
+            Encoding[] encodingsToTry = { Encoding.UTF8, Encoding.GetEncoding("iso-8859-9"), Encoding.Default };
 
-				// Handle each line of the SRT file
-				string sLine;
-				while ((sLine = strReader.ReadLine()) != null)
-				{
-					// We only care about lines that aren't just an integer (aka ignore dialog id number lines)
-					if (rgxDialogNumber.IsMatch(sLine))
-						continue;
+            foreach (var encoding in encodingsToTry)
+            {
+                try
+                {
+                    using (StreamReader strReader = new StreamReader(srtFilePath, encoding))
+                    using (StreamWriter strWriter = new StreamWriter(vttFilePath, false, Encoding.UTF8))
+                    {
+                        var rgxDialogNumber = new Regex(@"^\d+$");
+                        var rgxTimeFrame = new Regex(@"(\d\d:\d\d:\d\d,\d\d\d) --> (\d\d:\d\d:\d\d,\d\d\d)");
 
-					// If the line is a time frame line, reformat and output the time frame
-					Match match = rgxTimeFrame.Match(sLine);
-					if (match.Success)
-					{
-						if (_offsetMs > 0)
-						{
-							// Extract the times from the matched time frame line
-							var tsStartTime = TimeSpan.Parse(match.Groups[1].Value.Replace(',', '.'));
-							var tsEndTime = TimeSpan.Parse(match.Groups[2].Value.Replace(',', '.'));
+                        strWriter.WriteLine("WEBVTT");
+                        strWriter.WriteLine("");
 
-							// Modify the time with the offset
-							long startTimeMs = _nOffsetDirection * _offsetMs + (uint)tsStartTime.TotalMilliseconds;
-							long endTimeMs = _nOffsetDirection * _offsetMs + (uint)tsEndTime.TotalMilliseconds;
-							tsStartTime = TimeSpan.FromMilliseconds(startTimeMs < 0 ? 0 : startTimeMs);
-							tsEndTime = TimeSpan.FromMilliseconds(endTimeMs < 0 ? 0 : endTimeMs);
+                        string sLine;
+                        while ((sLine = strReader.ReadLine()) != null)
+                        {
+                            if (rgxDialogNumber.IsMatch(sLine)) continue;
 
-							// Construct the new time frame line
-							sLine = tsStartTime.ToString(@"hh\:mm\:ss\.fff") +
-									" --> " +
-									tsEndTime.ToString(@"hh\:mm\:ss\.fff");
-						}
-						else
-						{
-							sLine = sLine.Replace(',', '.'); // Simply replace the comma in the time with a period
-						}
-					}
-                    
-					strWriter.WriteLine(sLine); // Write out the line
-				}
-			
-		}
+                            Match match = rgxTimeFrame.Match(sLine);
+                            if (match.Success)
+                            {
+                                sLine = match.Groups[1].Value.Replace(',', '.') + " --> " + match.Groups[2].Value.Replace(',', '.');
+                            }
 
-	}
+                            strWriter.WriteLine(sLine);
+                        }
+
+                        break; // Kodlama başarılı bir şekilde algılandı, döngüyü kır
+                    }
+                }
+                catch (DecoderFallbackException)
+                {
+                    // Bu kodlamayla okuma başarısız oldu, bir sonraki kodlamayı dene
+                }
+            }
+        }
+
+
+
+    }
 }
